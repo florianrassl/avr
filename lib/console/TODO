@@ -1,0 +1,9 @@
+nicht implimentirte dinge oder bugs sind hier aufgelistet.
+
+TODO:
+	consollen strem aufsetzen und genericTools umbauen. nicht mehr mit printf und stdout arbeiten.
+	sondern mit (ich glaube;)) fprintf oder sprintf oder vprintf :wq ########glaube getan
+
+
+
+BUGS:
