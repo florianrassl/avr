@@ -15,6 +15,7 @@ typedef void toolRxChar(char c);
 
 extern void nshUpdate();
 extern void nshInit();
+void addTool(toolMethode *toolMethode, char* toolName, toolRxChar toolMethodeRxChar);
 typedef char *rxOut(char c); 
 extern toolRxChar *toolRxCharM;
 extern rxOut *out;

@@ -46,7 +46,6 @@ rm 		= rm -rf
 #...
 
 src		+= ./rc.c
-#src		+= ./tool.c
 src		+= ../../klib/uart/uart.c
 src		+= ../../klib/nsh/nsh.c
 #src		+= ../../klib/servo/servo.c
