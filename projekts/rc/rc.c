@@ -10,33 +10,28 @@
 #include "rc.h"
 #include "prof.h"
 #include "calc.h"
+#include "tool.h"
 
-#define s_malloc 50
+#define s_malloc 200
 
 #define PC 0 //power control
 
-void loop();
-
 stick sticks[4];
-
-int8_t print_data(char *args[], uint8_t argc){
-  char buff[10];
-  nprint("c0: ");
-  nprint(itoa(sticks[0].cal_data, buff, 10));
-  nprint("   \tc1: ");
-  nprint(itoa(sticks[1].cal_data, buff, 10));
-  nprint("   \tc2: ");
-  nprint(itoa(sticks[2].cal_data, buff, 10));
-  nprint("   \tc3: ");
-  nprint(itoa(sticks[3].cal_data, buff, 10));
-  nprint("\n\r");
-  loop();
-  return 1;
-}
 
 void init(){
   addTool(&print_data, "print", NULL);
-  load_prof(0, sticks);
+  addTool(&lock_sticks, "lock_sticks", NULL);
+  addTool(&unlock_sticks, "unlock_sticks", NULL);
+  addTool(&invert_stick, "invert_stick", NULL);
+  addTool(&load_prof, "load_prof", NULL);
+  addTool(&save_prof, "save_prof", NULL);
+  addTool(&set_default_prof, "set_default_prof", NULL);
+  addTool(&load_defaults, "load_defaults", NULL);
+  addTool(&set_pin, "set_pin", NULL);
+  addTool(&set_scale, "set_scale", NULL);
+  addTool(&print_config, "p", NULL);
+
+  load_default_prof(0, sticks);
   initADC();
 }
 

@@ -14,7 +14,7 @@ HFUSE	= 0x00
 #FUSE	+= -U hfuse:w:$(HFUSE):m
 
 F_CPU	= 16000000 
-USART0_BAUDRATE	= 9600
+USART0_BAUDRATE	= 57600
 USART1_BAUDRATE	= 9600
 
 
@@ -50,6 +50,8 @@ src		+= ../../klib/uart/uart.c
 src		+= ../../klib/nsh/nsh.c
 #src		+= ../../klib/servo/servo.c
 src		+= ../../klib/std/static_malloc.c
+src   += ./prof.c
+src		+= ./tool.c
 #...
 
 bulid: $(src)
