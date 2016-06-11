@@ -6,6 +6,7 @@
 #include "../../klib/nsh/nsh.h"
 #include "../../klib/include/adc.h"
 #include "../../klib/include/static_malloc.h"
+#include "../../klib/include/loop_control.h"
 
 #include "rc.h"
 #include "prof.h"
@@ -33,11 +34,13 @@ void init(){
 
   load_default_prof(0, sticks);
   initADC();
+  loop_control_init(100);
 }
 
 void loop(){
   update_raw_data(sticks);
   scale_to_res(sticks);
+  loop_wait();
 }
 
 int main(){

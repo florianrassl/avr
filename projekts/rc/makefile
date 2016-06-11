@@ -37,6 +37,7 @@ CFLAGS  += -DUSART1_BAUDRATE=$(USART1_BAUDRATE)
 #CFLAGS	+= -D_SERVOTOOL
 CFLAGS	+= -D_ADCTOOL
 CFLAGS	+= -DMCU
+CFLAGS	+= -DDEBUG
 
 rm 		= rm -rf
 
@@ -50,6 +51,7 @@ src		+= ../../klib/uart/uart.c
 src		+= ../../klib/nsh/nsh.c
 #src		+= ../../klib/servo/servo.c
 src		+= ../../klib/std/static_malloc.c
+src		+= ../../klib/loop_control/loop_control.c
 src   += ./prof.c
 src		+= ./tool.c
 #...
