@@ -49,6 +49,9 @@ void loop(){
   loop_wait();
 }
 
+
+
+
 int main(){
   static uint8_t malloc_d[s_malloc];
   init_static_malloc(malloc_d, s_malloc);
