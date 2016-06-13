@@ -1,5 +1,6 @@
 
 #include <avr/interrupt.h>
+#include <avr/io.h>
 #include <stdlib.h>
 
 #include "../../klib/uart/uart.h"
@@ -7,11 +8,13 @@
 #include "../../klib/include/adc.h"
 #include "../../klib/include/static_malloc.h"
 #include "../../klib/include/loop_control.h"
+#include "../../klib/include/soft_uart_timer.h"
 
 #include "rc.h"
 #include "prof.h"
 #include "calc.h"
 #include "tool.h"
+#include "tx.h"
 
 #define s_malloc 200
 
@@ -34,12 +37,15 @@ void init(){
 
   load_default_prof(0, sticks);
   initADC();
-  loop_control_init(100);
+  soft_uart_timer_init(&PORTB, &DDRB, 1);
+  loop_control_init(10);
 }
 
 void loop(){
   update_raw_data(sticks);
   scale_to_res(sticks);
+  //send_data(&softUartDev);
+  //charDevPutStr(&soft_uart_timer_dev, "1");
   loop_wait();
 }
 

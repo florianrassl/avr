@@ -1,0 +1,5 @@
+#ignore "rootfs"
+
+*elf
+*hex
+

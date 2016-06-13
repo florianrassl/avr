@@ -15,6 +15,7 @@ HFUSE	= 0x00
 
 F_CPU	= 16000000 
 USART0_BAUDRATE	= 57600
+#USART0_BAUDRATE = 9600
 USART1_BAUDRATE	= 9600
 
 
@@ -37,7 +38,7 @@ CFLAGS  += -DUSART1_BAUDRATE=$(USART1_BAUDRATE)
 #CFLAGS	+= -D_SERVOTOOL
 CFLAGS	+= -D_ADCTOOL
 CFLAGS	+= -DMCU
-CFLAGS	+= -DDEBUG
+#CFLAGS	+= -DDEBUG
 
 rm 		= rm -rf
 
@@ -52,8 +53,10 @@ src		+= ../../klib/nsh/nsh.c
 #src		+= ../../klib/servo/servo.c
 src		+= ../../klib/std/static_malloc.c
 src		+= ../../klib/loop_control/loop_control.c
+src		+= ../../klib/uart/soft_uart_timer.c
 src   += ./prof.c
 src		+= ./tool.c
+src		+= ./tx.c
 #...
 
 bulid: $(src)

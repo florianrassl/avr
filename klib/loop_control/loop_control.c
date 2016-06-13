@@ -2,15 +2,15 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-#define f_timer 16000000/1024
+#define f_timer 16000000ul/1024
 
 #ifdef DEBUG
 #include <stdlib.h>
 #include "../nsh/nsh.h"
 #endif
 
-volatile uint8_t __f;
-uint8_t soft_presc;
+static volatile uint8_t __f;
+static uint8_t soft_presc;
 
 void loop_f(uint16_t f);
 
