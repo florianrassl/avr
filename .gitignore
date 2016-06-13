@@ -1,5 +1,5 @@
 #ignore "rootfs"
 
-*elf
-*hex
+*.elf
+*.hex
 
