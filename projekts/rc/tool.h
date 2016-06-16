@@ -9,6 +9,7 @@ int8_t unlock_sticks(char *args[], uint8_t argc);
 int8_t invert_stick(char *args[], uint8_t argc);
 int8_t set_pin(char *args[], uint8_t argc);
 int8_t set_scale(char *args[], uint8_t argc);
+int8_t togel_mid_null(char *args[], uint8_t argc);
 int8_t print_config(char *args[], uint8_t argc);
 
 #endif

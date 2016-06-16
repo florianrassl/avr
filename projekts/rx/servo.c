@@ -15,17 +15,17 @@
 
 
 volatile uint8_t servo = ANZSERVO+1;
-volatile uint16_t position[ANZSERVO];
+volatile uint16_t position[8];
 volatile uint8_t pin_start = 0, pin_stop = 0;
 uint16_t ERG_TIME = 20000 -(ANZSERVO*2000);
 
 void setServoPos(uint8_t servo, uint16_t pos){
 	uint16_t tmp=0;
 	uint8_t i;
-	if(pos>1100)
-		pos=1100;
-	position[servo]=pos+1000;
-	for(i=0; i<ANZSERVO; i++){
+	if(pos>1200)
+		pos=1200;
+	position[servo]=((pos*2)+2000);
+	for(i=3; i<ANZSERVO; i++){
 		tmp+=position[i];
 	}
 	ERG_TIME = 20000-tmp;
@@ -46,7 +46,7 @@ void set_start_pos(void){
 void servo_init(uint8_t pin_start_p, uint8_t pin_stop_p){
   pin_start = pin_start_p;
   pin_stop = pin_stop_p;
-	DDRS = 0xff;
+	DDRS |=(1 << 3) | (1 << 4) | (1 << 5) | (1 << 6) | (1 << 7);
 	OCR1A = 0xffff;
 	TCCR1B |= (1 << WGM12);// Mode 4, CTC on OCR1A
 	TIMSK1 |= (1 << OCIE1A);//Set interrupt on compare match
@@ -59,7 +59,7 @@ ISR (TIMER1_COMPA_vect){
 	PORTS &= ~(1<<servo);//pulz beenden
 	servo++;
 	if(!(servo<ANZSERVO+1))
-		servo = 0;
+		servo = pin_start;
 	if(servo>=ANZSERVO){
 		OCR1A = ERG_TIME;
 	}

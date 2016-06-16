@@ -2,6 +2,7 @@
 #include <avr/interrupt.h>
 #include <avr/io.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "../../klib/uart/uart.h"
 #include "../../klib/nsh/nsh.h"
@@ -33,24 +34,43 @@ void init(){
   addTool(&load_defaults, "load_defaults", NULL);
   addTool(&set_pin, "set_pin", NULL);
   addTool(&set_scale, "set_scale", NULL);
+  addTool(&togel_mid_null, "togel_mid_null", NULL);
   addTool(&print_config, "p", NULL);
 
   load_default_prof(0, sticks);
   initADC();
   soft_uart_timer_init(&PORTB, &DDRB, 1);
-  loop_control_init(10);
+  loop_control_init(100);
+  
+
+}
+
+#define s_d_print(str) charDevPutStr(&soft_uart_timer_dev,(char*) str)
+
+void send_data_h(){
+  char buff[10];
+  static char out_data[100]="   ";
+
+  send_block((void*)out_data, strlen(out_data));
+  strcpy(out_data, "");
+  strcat(out_data, "c0: ");
+  strcat(out_data, itoa(sticks[0].cal_data, buff, 10));
+  strcat(out_data, "   \tc1: ");
+  strcat(out_data, itoa(sticks[1].cal_data, buff, 10));
+  strcat(out_data, "   \tc2: ");
+  strcat(out_data, itoa(sticks[2].cal_data, buff, 10));
+  strcat(out_data, "   \tc3: ");
+  strcat(out_data, itoa(sticks[3].cal_data, buff, 10));
+  strcat(out_data, "\n\r");
 }
 
 void loop(){
   update_raw_data(sticks);
   scale_to_res(sticks);
-  //send_data(&softUartDev);
-  //charDevPutStr(&soft_uart_timer_dev, "1");
+  //send_data_h();
+  send_data();
   loop_wait();
 }
-
-
-
 
 int main(){
   static uint8_t malloc_d[s_malloc];

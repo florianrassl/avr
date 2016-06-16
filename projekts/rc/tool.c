@@ -70,6 +70,19 @@ int8_t set_scale(char *args[], uint8_t argc){
   return 0;
 }
 
+int8_t togel_mid_null(char *args[], uint8_t argc){
+  uint8_t i;
+  if(argc != 1){
+    nprint("ERROR use stick i\n\r");\
+    return 0;
+  }
+  i=atoi(args[0]);
+  if(i>3)
+    return 0;
+  sticks[i].mid_null ^= 1;
+  return 0;
+}
+
 int8_t print_config(char *args[], uint8_t argc){
   char buff[10];
   uint8_t i;
